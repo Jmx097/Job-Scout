@@ -1,0 +1,106 @@
+{
+  "apiVersion": "serving.knative.dev/v1",
+  "kind": "Service",
+  "metadata": {
+    "annotations": {
+      "run.googleapis.com/build-enable-automatic-updates": "false",
+      "run.googleapis.com/build-id": "286f138c-b187-4e08-85f5-04b3f0b94a1a",
+      "run.googleapis.com/build-image-uri": "us-central1-docker.pkg.dev/job-scout-483620/cloud-run-source-deploy/job-scout-api",
+      "run.googleapis.com/build-name": "projects/402669489216/locations/us-central1/builds/286f138c-b187-4e08-85f5-04b3f0b94a1a",
+      "run.googleapis.com/build-source-location": "gs://run-sources-job-scout-483620-us-central1/services/job-scout-api/1767819393.923825-1542be836f3046658c69863584f49580.zip#1767819398078468",
+      "run.googleapis.com/client-name": "gcloud",
+      "run.googleapis.com/client-version": "551.0.0",
+      "run.googleapis.com/ingress": "all",
+      "run.googleapis.com/ingress-status": "all",
+      "run.googleapis.com/maxScale": "12",
+      "run.googleapis.com/operation-id": "ae90ae9c-2f95-43eb-8822-89c3d5beb827",
+      "run.googleapis.com/urls": "[\"https://job-scout-api-402669489216.us-central1.run.app\"]",
+      "serving.knative.dev/creator": "dux12345678@gmail.com",
+      "serving.knative.dev/lastModifier": "dux12345678@gmail.com"
+    },
+    "creationTimestamp": "2026-01-07T20:28:41.739193Z",
+    "generation": 6,
+    "labels": {
+      "cloud.googleapis.com/location": "us-central1"
+    },
+    "name": "job-scout-api",
+    "namespace": "402669489216",
+    "resourceVersion": "AAZH0q562Ok",
+    "selfLink": "/apis/serving.knative.dev/v1/namespaces/402669489216/services/job-scout-api",
+    "uid": "6a2672ed-0bb4-4109-968b-ff52d887c695"
+  },
+  "spec": {
+    "template": {
+      "metadata": {
+        "annotations": {
+          "autoscaling.knative.dev/maxScale": "12",
+          "run.googleapis.com/client-name": "gcloud",
+          "run.googleapis.com/client-version": "551.0.0",
+          "run.googleapis.com/startup-cpu-boost": "true"
+        },
+        "labels": {
+          "client.knative.dev/nonce": "eukrhzhhdr",
+          "run.googleapis.com/startupProbeType": "Default"
+        }
+      },
+      "spec": {
+        "containerConcurrency": 80,
+        "containers": [
+          {
+            "env": [
+              {
+                "name": "ENCRYPTION_KEY",
+                "value": "rpgs-X_WJ3i0mo1t135NPpCo7v3wd9EKDnyosCw7_7g="
+              },
+              {
+                "name": "CLERK_SECRET_KEY",
+                "value": "sk_test_WlK4ecdT8XFbi6dQWKh408P168mftkapYM7aIIU8EP"
+              },
+              {
+                "name": "CLERK_ISSUER",
+                "value": "https://live-coyote-24.clerk.accounts.dev"
+              },
+              {
+                "name": "DATABASE_URL",
+                "value": "sqlite+aiosqlite:///./data/jobscout.db"
+              },
+              {
+                "name": "CORS_ORIGINS",
+                "value": "[\"*\"]"
+              }
+            ],
+            "image": "gcr.io/job-scout-483620/job-scout-api",
+            "ports": [
+              {
+                "containerPort": 8080,
+                "name": "http1"
+              }
+            ],
+            "resources": {
+              "limits": {
+                "cpu": "1000m",
+                "memory": "512Mi"
+              }
+            },
+            "startupProbe": {
+              "failureThreshold": 1,
+              "periodSeconds": 240,
+              "tcpSocket": {
+                "port": 8080
+              },
+              "timeoutSeconds": 240
+            }
+          }
+        ],
+        "serviceAccountName": "402669489216-compute@developer.gserviceaccount.com",
+        "timeoutSeconds": 300
+      }
+    },
+    "traffic": [
+      {
+        "latestRevision": true,
+        "percent": 100
+      }
+    ]
+  }
+}

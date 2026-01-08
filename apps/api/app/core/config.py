@@ -2,7 +2,7 @@
 Application configuration using pydantic-settings.
 """
 import json
-from typing import List
+from typing import List, Any
 from pydantic import field_validator
 from pydantic_settings import BaseSettings
 
@@ -21,7 +21,7 @@ class Settings(BaseSettings):
     CLERK_ISSUER: str = ""  # e.g., https://your-app.clerk.accounts.dev
     
     # CORS
-    CORS_ORIGINS: List[str] = ["http://localhost:3000"]
+    CORS_ORIGINS: Any = ["http://localhost:3000"]
     
     @field_validator("CORS_ORIGINS", mode="before")
     @classmethod
